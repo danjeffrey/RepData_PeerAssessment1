@@ -1,9 +1,9 @@
 ## Updated by Dan Jeffrey
 This repository has been updated with my own files for the assignment. Please find my completed assignment in these files:
-* PA1_template.Rmd - the knitr report source file
-* PA1_template.md - internmediate file generated while processing PA1_template.Rmd
-* README.md (this file)
-* images in figures subfolder -- used by the knitr report file
+* [PA1_template.Rmd](PA1_template.Rmd) - the knitr report source file
+* [PA1_template.md](PA1_template.md) - internmediate file generated while processing PA1_template.Rmd
+* [README.md](README.md) (this file)
+* [figures](figures) images in figures subfolder used by the knitr report file
 
 ## Introduction
 
