@@ -7,10 +7,11 @@ output:
 
 
 ## Loading and preprocessing the data
-
+rawData <- read.csv("activity.csv", colClasses = c("integer","Date","integer"))
 
 
 ## What is mean total number of steps taken per day?
+stepsByInterval = summarize(group_by(rawData, interval), avg=mean(steps, na.rm=TRUE))
 
 
 
