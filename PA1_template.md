@@ -81,7 +81,7 @@ histogram(stepsByDate$steps, xlab="Number of Steps")
 
 ![](PA1_template_files/figure-html/hist2-1.png)<!-- -->
   
-Filling the missing values changes the data set significantly. It creates a spread of steps per day that is closer to a normal distribution.  
+The above histogram shows that filling the missing values changes the data set significantly. It creates a spread of steps per day that is closer to a normal distribution.  
   
 
 ```r

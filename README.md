@@ -3,7 +3,7 @@ This repository has been updated with my own files for the assignment. Please fi
 * [PA1_template.Rmd](PA1_template.Rmd) - the knitr report source file
 * [PA1_template.md](PA1_template.md) - internmediate file generated while processing PA1_template.Rmd
 * [README.md](README.md) (this file)
-* [figure](figure) subdirectory containing images used by the knitr report file
+* [figures](PA1_template_files\figure-html) subdirectory containing images used by the knitr report file
 
 ### Figures are in [./PA1_template_files/figure-html](./PA1_template_files/figure-html)
 Note: the requirement to include the figure diorectory is wrong about the 
