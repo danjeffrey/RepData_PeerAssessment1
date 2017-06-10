@@ -32,7 +32,7 @@ stepsByDate <- summarize(group_by(rawData, date), steps = sum(steps, na.rm=TRUE)
 histogram(stepsByDate$steps, xlab="Number of Steps")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
+![](PA1_template_files/figure-html/hist1-1.png)<!-- -->
 
 ```r
 meanStepsPerDay <- mean(stepsByDate$steps, na.rm = TRUE)
@@ -50,7 +50,7 @@ stepsByInterval <- summarize(group_by(rawData, interval),
 with(stepsByInterval, plot(avg~interval, type="l", ylab="Average Number of Steps", xlab="Interval"))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+![](PA1_template_files/figure-html/stepsByIntervalFigure-1.png)<!-- -->
 
 ```r
 maximumAverageSteps <- stepsByInterval[which.max(as.matrix(stepsByInterval)[,2]),]
@@ -79,7 +79,7 @@ stepsByDate <- summarize(group_by(filledDataset, date), steps = sum(steps, na.rm
 histogram(stepsByDate$steps, xlab="Number of Steps")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+![](PA1_template_files/figure-html/hist2-1.png)<!-- -->
   
 Filling the missing values changes the data set significantly. It creates a spread of steps per day that is closer to a normal distribution.  
   
@@ -117,7 +117,7 @@ xyplot(avg~interval | factor(day), data=filledWithWeekends, pch=19,
        type="l")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
+![](PA1_template_files/figure-html/plotWeekends-1.png)<!-- -->
 
 #### The End
 

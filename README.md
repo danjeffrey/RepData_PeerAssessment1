@@ -5,6 +5,12 @@ This repository has been updated with my own files for the assignment. Please fi
 * [README.md](README.md) (this file)
 * [figure](figure) subdirectory containing images used by the knitr report file
 
+### Figures are in [./PA1_template_files/figure-html](./PA1_template_files/figure-html)
+Note: the requirement to include the figure diorectory is wrong about the 
+default directory being "/figure." It is named after the markdown file by
+default. So my figure folder is actually "PA1_template_files\figure-html."
+
+
 ## Introduction
 
 It is now possible to collect a large amount of data about personal

@@ -7,14 +7,14 @@ output:
 #### by Dan Jeffrey  
 
 ###Setup: 
-```{r  results='hide', message=FALSE, warning=FALSE}
+```{r setup, results='hide', message=FALSE, warning=FALSE}
 library(dplyr)
 library(lattice)
 ```
   
   
 ## Loading and preprocessing the data
-```{r}
+```{r processing}
 unzip("activity.zip")
 rawData <- read.csv("activity.csv", colClasses = c("integer","Date","integer"))
 str(rawData)
@@ -22,11 +22,11 @@ str(rawData)
   
   
 ## What is mean total number of steps taken per day?
-```{r }
+```{r hist1}
 stepsByDate <- summarize(group_by(rawData, date), steps = sum(steps, na.rm=TRUE))
 histogram(stepsByDate$steps, xlab="Number of Steps")
 ```
-```{r  results="hide"}
+```{r stepsPerDay1, results="hide"}
 meanStepsPerDay <- mean(stepsByDate$steps, na.rm = TRUE)
 medianStepsPerDay <- median(stepsByDate$steps, na.rm = TRUE)
 ```
@@ -35,7 +35,7 @@ The median steps per day is `r prettyNum(medianStepsPerDay, big.mark = ",")`.
   
   
 ## What is the average daily activity pattern?
-```{r}
+```{r stepsByIntervalFigure }
 stepsByInterval <- summarize(group_by(rawData, interval), 
                             avg=mean(steps, na.rm=TRUE))
 with(stepsByInterval, plot(avg~interval, type="l", ylab="Average Number of Steps", xlab="Interval"))
@@ -44,27 +44,27 @@ maximumAverageSteps <- stepsByInterval[which.max(as.matrix(stepsByInterval)[,2])
 The maximum number of steps per interval, on average, for all days was `r prettyNum(maximumAverageSteps[1,2], big.mark = ",")` in interval `r prettyNum(maximumAverageSteps[1,1], big.mark = ",")`.  
 
 ## Imputing missing values
-```{r results='hide'}
+```{r countMissing, results='hide'}
 stepsNA <- is.na(rawData[,1])
 nas <- sum(stepsNA)
 ```
 The total number of rows with NA's is `r nas`.  Note that the Date and Interval fields contained no NA values.
 
 The NA's are replaced with the mean values for the same interval to create a new dataframe with no NA values:
-```{r}
+```{r fillMissing}
 rawWithMean <- merge(rawData, stepsByInterval, by="interval")
 filledDataset <- mutate(rawWithMean, steps = ifelse(is.na(steps), avg, steps))
 ```
   
 #### With a "filled" data set: 
-```{r }
+```{r hist2}
 stepsByDate <- summarize(group_by(filledDataset, date), steps = sum(steps, na.rm=TRUE))
 histogram(stepsByDate$steps, xlab="Number of Steps")
 ```
   
-Filling the missing values changes the data set significantly. It creates a spread of steps per day that is closer to a normal distribution.  
+The above histogram shows that filling the missing values changes the data set significantly. It creates a spread of steps per day that is closer to a normal distribution.  
   
-```{r  results="hide"}
+```{r getSTepsPerDay2, results="hide"}
 meanStepsPerDay <- mean(stepsByDate$steps, na.rm = TRUE)
 medianStepsPerDay <- median(stepsByDate$steps, na.rm = TRUE)
 ```
@@ -73,12 +73,12 @@ The median steps per day is `r prettyNum(medianStepsPerDay, big.mark = ",")`.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 Assign a factor to each row that identifies weekends and weekdays:
-```{r}
+```{r prepFilledWithWeekends}
 filledWithWeekends <- mutate(filledDataset, day=factor(ifelse(weekdays(rawData$date) == "Saturday" | weekdays(rawData$date) == "Sunday", "weekend","weekday")))
 str(filledWithWeekends)
 ```
 
-```{r}
+```{r plotWeekends}
 stepsByInterval <- summarize(group_by(filledWithWeekends, day, interval), 
                             avg=mean(steps))
 xyplot(avg~interval | factor(day), data=filledWithWeekends, pch=19,
